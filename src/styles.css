@@ -101,10 +101,18 @@ img {
 }
 
 .nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   font-family: var(--font-serif);
   font-weight: 600;
   font-size: 1.25rem;
   color: var(--color-earth);
+}
+
+.nav-logo-icon {
+  width: 24px;
+  height: 24px;
 }
 
 .nav-links {
