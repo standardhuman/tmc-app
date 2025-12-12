@@ -5,7 +5,7 @@ export function renderHome(app) {
   app.innerHTML = renderPublicLayout(`
     <header class="hero">
       <div class="hero-content">
-        <h1>The Men's Circle</h1>
+        <img src="/logo.jpg" alt="The Men's Circle" class="hero-logo">
         <p class="hero-subtitle" style="font-size: 1.5rem; font-style: italic; color: var(--color-earth); margin-bottom: 1rem;">
           We forge brotherhood, inspire transformation, and support men in living on purpose.
         </p>
