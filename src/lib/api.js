@@ -112,3 +112,15 @@ export async function getResources() {
 export async function getAnnouncements() {
   return request('/announcements');
 }
+
+// Config / Settings
+export async function getConfig() {
+  return request('/config');
+}
+
+export async function updateConfig(data) {
+  return request('/config', {
+    method: 'POST',
+    body: JSON.stringify(data)
+  });
+}

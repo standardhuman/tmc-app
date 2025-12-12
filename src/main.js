@@ -11,6 +11,7 @@ import { renderDashboard } from './pages/dashboard.js';
 import { renderDirectory } from './pages/directory.js';
 import { renderResources } from './pages/resources.js';
 import { renderAnnouncements } from './pages/announcements.js';
+import { renderSettings } from './pages/settings.js';
 
 const app = document.getElementById('app');
 
@@ -52,6 +53,12 @@ router.addRoute('/members/announcements', () => {
   }
 });
 
+router.addRoute('/members/settings', () => {
+  if (requireAuth()) {
+    renderSettings(app);
+  }
+});
+
 router.addRoute('/logout', () => {
   clearSession();
   router.navigate('/');
@@ -78,6 +85,7 @@ export function renderMemberLayout(content, activePage = '') {
           <li><a href="#/members/directory" class="${activePage === 'directory' ? 'active' : ''}">Directory</a></li>
           <li><a href="#/members/resources" class="${activePage === 'resources' ? 'active' : ''}">Resources</a></li>
           <li><a href="#/members/announcements" class="${activePage === 'announcements' ? 'active' : ''}">Announcements</a></li>
+          <li style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--color-border);"><a href="#/members/settings" class="${activePage === 'settings' ? 'active' : ''}">Settings</a></li>
         </ul>
       </aside>
       <main class="member-main">
