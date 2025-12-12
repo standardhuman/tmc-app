@@ -1,9 +1,6 @@
 // Feedback API - receives feedback from the proposal site
-// Writes to the "Website Feedback" tab and sends email notification
+// Sends email notification (sheet write can be added later with service account)
 
-import { appendRow } from './_lib/sheets-write.js';
-
-const ROSTER_SHEET_ID = process.env.ROSTER_SHEET_ID;
 const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL;
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 
@@ -41,33 +38,7 @@ export default async function handler(req, res) {
     const timestamp = new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles' });
     const missingFeaturesStr = Array.isArray(missingFeatures) ? missingFeatures.join(', ') : (missingFeatures || '');
 
-    // 1. Write to Google Sheet
-    if (ROSTER_SHEET_ID) {
-      try {
-        await appendRow(ROSTER_SHEET_ID, 'Website Feedback', [
-          timestamp,
-          name || 'Anonymous',
-          overall,
-          design,
-          designComments || '',
-          directory,
-          directoryComments || '',
-          intros,
-          login,
-          loginComments || '',
-          missingFeaturesStr,
-          missingOther || '',
-          bugs || '',
-          other || ''
-        ]);
-        console.log('Feedback written to sheet');
-      } catch (sheetError) {
-        console.error('Failed to write to sheet:', sheetError);
-        // Continue - still try to send email
-      }
-    }
-
-    // 2. Send email notification
+    // Send email notification
     if (RESEND_API_KEY && NOTIFICATION_EMAIL) {
       try {
         const response = await fetch('https://api.resend.com/emails', {
@@ -126,7 +97,7 @@ export default async function handler(req, res) {
                 ${other ? `<h3 style="color: #8B5A2B; margin-top: 20px;">Other Comments</h3><div style="background: #FAF8F5; padding: 15px; border-radius: 6px;">${other}</div>` : ''}
 
                 <p style="margin-top: 30px; font-size: 12px; color: #6B6B6B; border-top: 1px solid #ddd; padding-top: 15px;">
-                  This feedback was also saved to the "Website Feedback" tab in the roster sheet.
+                  Submitted via TMC Website Proposal feedback form.
                 </p>
               </div>
             `,
