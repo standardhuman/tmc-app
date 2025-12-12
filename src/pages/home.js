@@ -10,7 +10,7 @@ export function renderHome(app) {
           We forge brotherhood, inspire transformation, and support men in living on purpose.
         </p>
         <p class="hero-subtitle">
-          A community of men committed to growth, accountability, and authentic connection. Weekly in Berkeley, around the fire.
+          A community of men committed to growth, accountability, and authentic connection.
         </p>
         <a href="#contact" class="btn btn-primary" style="margin-top: 1rem;">Connect With Us</a>
       </div>
