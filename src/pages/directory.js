@@ -205,6 +205,13 @@ function renderMemberDetail(member) {
         ${member.sponsor ? `<p><strong>Sponsor:</strong> ${member.sponsor}</p>` : ''}
       </div>
 
+      ${member.intro ? `
+        <div class="member-detail-section member-intro-section">
+          <h3>Introduction Letter${member.introDate ? ` <span class="intro-date">(${member.introDate})</span>` : ''}</h3>
+          <div class="intro-text">${formatIntroText(member.intro)}</div>
+        </div>
+      ` : ''}
+
       <div class="member-detail-section">
         <h3>Contact</h3>
         ${member.email ? `<p><a href="mailto:${member.email}">${member.email}</a></p>` : ''}
@@ -218,4 +225,25 @@ function renderMemberDetail(member) {
 function getInitials(name) {
   if (!name) return '?';
   return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+}
+
+function formatIntroText(text) {
+  if (!text) return '';
+  // Escape HTML, then convert double newlines to paragraphs
+  const escaped = text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+
+  // Split on double newlines for paragraphs
+  const paragraphs = escaped.split(/\n\n+/).filter(p => p.trim());
+
+  if (paragraphs.length === 1) {
+    // Single paragraph - just convert single newlines to <br>
+    return `<p>${escaped.replace(/\n/g, '<br>')}</p>`;
+  }
+
+  return paragraphs
+    .map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`)
+    .join('');
 }
