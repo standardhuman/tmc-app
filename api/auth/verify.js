@@ -30,19 +30,28 @@ export default async function handler(req, res) {
     }
 
     // Get fresh user data from roster
-    const members = await getSheetData(ROSTER_SHEET_ID, 'Roster!A:Z');
-    const member = members.find(m => m.email?.toLowerCase() === payload.email.toLowerCase());
+    // Sheet columns: "E-Mail", "First Name", "Last Name", "Status", "Current Team"
+    const members = await getSheetData(ROSTER_SHEET_ID, 'Sheet1');
+    const member = members.find(m =>
+      m.email?.toLowerCase() === payload.email.toLowerCase() ||
+      m['e-mail']?.toLowerCase() === payload.email.toLowerCase()
+    );
 
     if (!member) {
       return res.status(401).json({ error: 'User not found' });
     }
 
+    // Map column names from sheet
+    const memberEmail = member.email || member['e-mail'];
+    const memberName = member.name || `${member.first_name || ''} ${member.last_name || ''}`.trim();
+    const memberTeam = member.team || member.current_team;
+
     // Create session token with current user data
     const sessionToken = createSessionToken({
-      email: member.email,
-      name: member.name,
-      status: member.status || 'active',
-      team: member.team,
+      email: memberEmail,
+      name: memberName,
+      status: member.status?.toLowerCase() || 'active',
+      team: memberTeam,
     });
 
     return res.status(200).json({ token: sessionToken });

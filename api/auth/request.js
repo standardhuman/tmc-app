@@ -26,8 +26,12 @@ export default async function handler(req, res) {
     }
 
     // Check if email exists in roster
-    const members = await getSheetData(ROSTER_SHEET_ID, 'Roster!A:Z');
-    const member = members.find(m => m.email?.toLowerCase() === email.toLowerCase());
+    // Sheet columns: "E-Mail", "First Name", "Last Name", "Status", "Current Team"
+    const members = await getSheetData(ROSTER_SHEET_ID, 'Sheet1');
+    const member = members.find(m =>
+      m.email?.toLowerCase() === email.toLowerCase() ||
+      m['e-mail']?.toLowerCase() === email.toLowerCase()
+    );
 
     if (!member) {
       return res.status(404).json({
@@ -35,8 +39,20 @@ export default async function handler(req, res) {
       });
     }
 
+    // Build name from first + last name columns
+    const memberEmail = member.email || member['e-mail'];
+    const memberName = member.name || `${member.first_name || ''} ${member.last_name || ''}`.trim();
+    const memberStatus = member.status?.toLowerCase();
+
+    // Only allow "Active" status members to log in
+    if (memberStatus !== 'active') {
+      return res.status(403).json({
+        error: "Your membership status doesn't allow access. Please contact an administrator."
+      });
+    }
+
     // Create magic link token
-    const token = createMagicToken(member.email, member.name, member.status);
+    const token = createMagicToken(memberEmail, memberName, memberStatus);
     const baseUrl = process.env.VERCEL_URL
       ? `https://${process.env.VERCEL_URL}`
       : 'http://localhost:5173';
@@ -57,7 +73,7 @@ export default async function handler(req, res) {
           html: `
             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
               <h1 style="color: #8B5A2B; font-size: 24px;">The Men's Circle</h1>
-              <p>Hello ${member.name || 'Brother'},</p>
+              <p>Hello ${memberName || 'Brother'},</p>
               <p>Click the button below to log in to The Men's Circle member area:</p>
               <p style="margin: 30px 0;">
                 <a href="${magicLink}" style="background: #D4652F; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block;">
