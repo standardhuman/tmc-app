@@ -12,7 +12,6 @@
     "vite": "^7.2.4"
   },
   "dependencies": {
-    "googleapis": "^168.0.0",
     "jsonwebtoken": "^9.0.3"
   }
 }

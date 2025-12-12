@@ -49,11 +49,9 @@ export function requireAuth(callback) {
     return false;
   }
 
-  // Check if user needs onboarding
-  if (session.user.status === 'pending' && window.location.hash !== '#/onboarding') {
-    window.location.hash = '/onboarding';
-    return false;
-  }
+  // Note: "pending" status users can now access the site
+  // Admins add complete member info directly to the roster sheet
+  // No self-service onboarding flow
 
   if (callback) callback(session);
   return true;

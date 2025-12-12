@@ -1,6 +1,6 @@
-import { appendSheetRow } from './_lib/sheets.js';
+// Contact form - sends email notification only (no sheet writing)
+// Contacts go directly to NOTIFICATION_EMAIL
 
-const CONTACTS_SHEET_ID = process.env.CONTACTS_SHEET_ID || process.env.ROSTER_SHEET_ID;
 const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL;
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 
@@ -24,18 +24,9 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Name, email, and message are required' });
     }
 
-    // Add to contacts sheet
-    const timestamp = new Date().toISOString();
-    await appendSheetRow(CONTACTS_SHEET_ID, 'Contacts!A:D', [
-      timestamp,
-      name,
-      email,
-      message,
-    ]);
-
     // Send notification email
     if (RESEND_API_KEY && NOTIFICATION_EMAIL) {
-      await fetch('https://api.resend.com/emails', {
+      const response = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${RESEND_API_KEY}`,
@@ -44,6 +35,7 @@ export default async function handler(req, res) {
         body: JSON.stringify({
           from: 'The Men\'s Circle <noreply@sailorskills.com>',
           to: NOTIFICATION_EMAIL,
+          reply_to: email,
           subject: `New Contact: ${name}`,
           html: `
             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
@@ -61,6 +53,14 @@ export default async function handler(req, res) {
           `,
         }),
       });
+
+      if (!response.ok) {
+        console.error('Failed to send email:', await response.text());
+        return res.status(500).json({ error: 'Failed to send message. Please try again.' });
+      }
+    } else {
+      // No email configured - log it
+      console.log('Contact submission (no email configured):', { name, email, message });
     }
 
     return res.status(200).json({ success: true });

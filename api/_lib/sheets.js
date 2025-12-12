@@ -1,97 +1,139 @@
-import { google } from 'googleapis';
+// Fetch data from published Google Sheets (no API key needed)
+// Sheets must be published: File > Share > Publish to web
 
-// Initialize Google Sheets client
-function getSheets() {
-  const auth = new google.auth.GoogleAuth({
-    credentials: {
-      client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-      private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-    },
-    scopes: ['https://www.googleapis.com/auth/spreadsheets'],
-  });
+/**
+ * Fetches data from a published Google Sheet
+ * @param {string} spreadsheetId - The sheet ID from the URL
+ * @param {string} sheetName - The tab/sheet name (e.g., "Roster", "Resources")
+ * @returns {Promise<Array<Object>>} Array of row objects with header keys
+ */
+export async function getSheetData(spreadsheetId, sheetName) {
+  // Handle "SheetName!A:Z" format from existing code
+  const cleanSheetName = sheetName.replace(/!.*$/, '');
 
-  return google.sheets({ version: 'v4', auth });
+  // Published sheets can be fetched as CSV
+  const url = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(cleanSheetName)}`;
+
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch sheet: ${response.status} ${response.statusText}`);
+  }
+
+  const csv = await response.text();
+  return parseCSV(csv);
 }
 
-// Get all rows from a sheet
-export async function getSheetData(spreadsheetId, range) {
-  const sheets = getSheets();
+/**
+ * Parse CSV text into array of objects
+ * First row is treated as headers
+ */
+function parseCSV(csv) {
+  const lines = parseCSVLines(csv);
+  if (lines.length === 0) return [];
 
-  const response = await sheets.spreadsheets.values.get({
-    spreadsheetId,
-    range,
-  });
+  // First row is headers - normalize them
+  const headers = lines[0].map(h =>
+    h.toLowerCase()
+      .replace(/\s+/g, '_')
+      .replace(/[^a-z0-9_]/g, '')
+  );
 
-  const rows = response.data.values || [];
-  if (rows.length === 0) return [];
+  // Convert remaining rows to objects
+  const data = [];
+  for (let i = 1; i < lines.length; i++) {
+    const row = lines[i];
+    // Skip empty rows
+    if (row.every(cell => !cell.trim())) continue;
 
-  // First row is headers
-  const headers = rows[0].map(h => h.toLowerCase().replace(/\s+/g, '_'));
-  const data = rows.slice(1).map(row => {
     const obj = {};
-    headers.forEach((header, i) => {
-      obj[header] = row[i] || '';
+    headers.forEach((header, idx) => {
+      obj[header] = row[idx] || '';
     });
-    return obj;
-  });
+    data.push(obj);
+  }
 
   return data;
 }
 
-// Append a row to a sheet
-export async function appendSheetRow(spreadsheetId, range, values) {
-  const sheets = getSheets();
+/**
+ * Parse CSV handling quoted fields with commas and newlines
+ */
+function parseCSVLines(csv) {
+  const lines = [];
+  let currentLine = [];
+  let currentField = '';
+  let inQuotes = false;
 
-  await sheets.spreadsheets.values.append({
-    spreadsheetId,
-    range,
-    valueInputOption: 'USER_ENTERED',
-    requestBody: {
-      values: [values],
-    },
-  });
-}
+  for (let i = 0; i < csv.length; i++) {
+    const char = csv[i];
+    const nextChar = csv[i + 1];
 
-// Update a row in a sheet (by row number)
-export async function updateSheetRow(spreadsheetId, range, values) {
-  const sheets = getSheets();
-
-  await sheets.spreadsheets.values.update({
-    spreadsheetId,
-    range,
-    valueInputOption: 'USER_ENTERED',
-    requestBody: {
-      values: [values],
-    },
-  });
-}
-
-// Find row index by email
-export async function findRowByEmail(spreadsheetId, sheetName, email) {
-  const sheets = getSheets();
-
-  const response = await sheets.spreadsheets.values.get({
-    spreadsheetId,
-    range: `${sheetName}!A:Z`,
-  });
-
-  const rows = response.data.values || [];
-  if (rows.length === 0) return null;
-
-  const headers = rows[0].map(h => h.toLowerCase().replace(/\s+/g, '_'));
-  const emailIndex = headers.indexOf('email');
-
-  if (emailIndex === -1) return null;
-
-  for (let i = 1; i < rows.length; i++) {
-    if (rows[i][emailIndex]?.toLowerCase() === email.toLowerCase()) {
-      return {
-        rowIndex: i + 1, // 1-indexed for Sheets API
-        data: rows[i],
-        headers,
-      };
+    if (inQuotes) {
+      if (char === '"' && nextChar === '"') {
+        // Escaped quote
+        currentField += '"';
+        i++; // Skip next quote
+      } else if (char === '"') {
+        // End of quoted field
+        inQuotes = false;
+      } else {
+        currentField += char;
+      }
+    } else {
+      if (char === '"') {
+        // Start of quoted field
+        inQuotes = true;
+      } else if (char === ',') {
+        // Field separator
+        currentLine.push(currentField.trim());
+        currentField = '';
+      } else if (char === '\n' || (char === '\r' && nextChar === '\n')) {
+        // End of line
+        currentLine.push(currentField.trim());
+        if (currentLine.some(f => f)) { // Skip completely empty lines
+          lines.push(currentLine);
+        }
+        currentLine = [];
+        currentField = '';
+        if (char === '\r') i++; // Skip \n in \r\n
+      } else if (char !== '\r') {
+        currentField += char;
+      }
     }
   }
 
-  return null;
+  // Don't forget the last field/line
+  if (currentField || currentLine.length > 0) {
+    currentLine.push(currentField.trim());
+    if (currentLine.some(f => f)) {
+      lines.push(currentLine);
+    }
+  }
+
+  return lines;
+}
+
+// These functions are no longer available with published sheets
+// Keeping stubs for compatibility - they'll return errors if called
+
+export async function appendSheetRow(spreadsheetId, range, values) {
+  throw new Error('Write operations not supported with published sheets. Add data directly to Google Sheets.');
+}
+
+export async function updateSheetRow(spreadsheetId, range, values) {
+  throw new Error('Write operations not supported with published sheets. Edit data directly in Google Sheets.');
+}
+
+export async function findRowByEmail(spreadsheetId, sheetName, email) {
+  // This can still work - just fetch and find
+  const data = await getSheetData(spreadsheetId, sheetName);
+  const member = data.find(row => row.email?.toLowerCase() === email.toLowerCase());
+
+  if (!member) return null;
+
+  return {
+    data: member,
+    // Row index not available with this approach, but not needed for read-only
+  };
 }

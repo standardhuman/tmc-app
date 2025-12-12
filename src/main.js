@@ -6,7 +6,7 @@ import { requireAuth, getUser, isAuthenticated, clearSession } from './lib/auth.
 import { renderHome } from './pages/home.js';
 import { renderLogin } from './pages/login.js';
 import { renderVerify } from './pages/verify.js';
-import { renderOnboarding } from './pages/onboarding.js';
+// import { renderOnboarding } from './pages/onboarding.js'; // Disabled in read-only mode
 import { renderDashboard } from './pages/dashboard.js';
 import { renderDirectory } from './pages/directory.js';
 import { renderResources } from './pages/resources.js';
@@ -21,12 +21,9 @@ router.addRoute('/login', () => renderLogin(app));
 router.addRoute('/verify', ({ params }) => renderVerify(app, params));
 
 // Protected routes
+// Onboarding disabled in read-only mode - redirect to dashboard
 router.addRoute('/onboarding', () => {
-  if (isAuthenticated()) {
-    renderOnboarding(app);
-  } else {
-    router.navigate('/login');
-  }
+  router.navigate('/members');
 });
 
 router.addRoute('/members', () => {
@@ -85,7 +82,7 @@ export function renderMemberLayout(content, activePage = '') {
           <li><a href="#/members/directory" class="${activePage === 'directory' ? 'active' : ''}">Directory</a></li>
           <li><a href="#/members/resources" class="${activePage === 'resources' ? 'active' : ''}">Resources</a></li>
           <li><a href="#/members/announcements" class="${activePage === 'announcements' ? 'active' : ''}">Announcements</a></li>
-          <li style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--color-border);"><a href="#/members/settings" class="${activePage === 'settings' ? 'active' : ''}">Settings</a></li>
+          <li style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--color-border);"><a href="#/members/settings" class="${activePage === 'settings' ? 'active' : ''}">Info</a></li>
         </ul>
       </aside>
       <main class="member-main">
