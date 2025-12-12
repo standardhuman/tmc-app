@@ -101,10 +101,13 @@ img {
 }
 
 .nav-logo {
-  font-family: var(--font-serif);
-  font-weight: 600;
-  font-size: 1.25rem;
-  color: var(--color-earth);
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo-img {
+  height: 48px;
+  width: auto;
 }
 
 .nav-links {
