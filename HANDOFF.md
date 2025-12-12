@@ -1,7 +1,7 @@
 # The Men's Circle App - Session Handoff
 
-**Date:** December 12, 2025 (Evening Session)
-**Status:** ✅ Full-featured member portal with rich profiles, resources, and branding
+**Date:** December 12, 2025 (Late Evening Session)
+**Status:** ✅ Feature-complete prototype ready for Vision Body review
 
 ---
 
@@ -11,75 +11,80 @@
 |---------|--------|-------|
 | Magic link login | ✅ Working | Emails via Resend |
 | Member authentication | ✅ Working | JWT sessions, 30-day expiry |
-| Member directory | ✅ Enhanced | Rich profiles with modal detail view |
+| Member directory | ✅ Enhanced | Rich profiles with intro letters |
 | Resources page | ✅ Working | 11 TMC docs from Essential Documents |
-| Homepage | ✅ Enhanced | TMC fire heart logo as centerpiece |
-| Team tabs | ✅ New | Filter directory by team |
+| Announcements | ✅ Working | 5 sample announcements in sheet |
+| Homepage | ✅ Enhanced | TMC fire logo, flame in nav |
+| Team tabs | ✅ Working | Filter directory by team |
+| Feedback API | ✅ New | Receives feedback from proposal site |
 
 ### Live URLs
 - **App:** https://app-sailorskills.vercel.app
 - **Proposal:** https://tmc-site-proposal.sailorskills.com
 
-### GitHub Repo
-- https://github.com/standardhuman/tmc-app
+### GitHub Repos
+- App: https://github.com/standardhuman/tmc-app
+- Proposal: https://github.com/standardhuman/tmc-proposal
 
 ---
 
 ## This Session's Work
 
-### 1. Logo & Branding
-- Generated fire heart logo with "THE MEN'S CIRCLE" text
-- Created TMC abbreviated version (`/logo-tmc.png`) - currently on homepage
-- Fine-tuned background color (#FBFAF7) to blend with page gradient
-- Removed logo from nav bar, kept text "The Men's Circle"
+### 1. Google Sheets MCP Integration
+- Verified gsheets MCP server is working
+- Can read/write to any Google Sheet Brian has access to
+- Tools: listSheets, readSheet, writeRange, createSheet, etc.
 
-### 2. Resources System
-- Created Resources sheet in TMC-Site-Draft folder
-- Extracted 11 documents from TMC Essential Documents:
-  - The Men's Circle Document, TMC Essential Documents
-  - Leader/Captain/Initiator Handbooks
-  - Pillar Guide Handbooks (2 versions)
-  - Sponsorship Handbook, Visitor's Guide
-  - Qualities of a Man in TMC, Core Team Roles
-- Resources display with "Open" buttons linking to Google Docs
+### 2. Intro Letters on Member Profiles
+- Added INTROS tab data to member profiles
+- API fetches Active Men + INTROS in parallel
+- Matches by name (lowercase normalized)
+- Displays in scrollable section with date badge
+- Styled with cream background and ember left border
 
-### 3. Enhanced Member Directory
-**Cards now show:**
-- Name + Position badge (Leader, Captain, Initiator, etc.)
-- Occupation
-- Purpose Essence (italic quote)
-- Team + Year Joined
+### 3. Announcements Fixed
+- Created "Announcements" tab in roster sheet
+- Populated with 5 sample announcements
+- API already fell back to ROSTER_SHEET_ID, so it just worked
+- Dashboard now shows recent announcements
 
-**Click any card** to open modal with:
-- Purpose section (Essence, Blessing, Mission, Message)
-- About (Occupation, Location, Identities)
-- TMC Journey (Team, Year Joined, Sponsor)
-- Contact (Email, Phone, Website - all clickable)
+### 4. Proposal Site Updated
+Major updates to https://tmc-site-proposal.sailorskills.com:
 
-**Also:**
-- Team filter tabs at top
-- Includes Sabbatical members (with badge)
-- Hover effects on cards
+**New Sections:**
+- **Preview Section** (forest green) - Link to test site with login instructions
+- **Feedback Form** - 8 comprehensive questions for Vision Body
+- **"Beautiful Fallback"** - Explains zero-risk approach (sheets remain if site disappears)
 
-### 4. Announcements (Mock Data Ready)
-Created CSV with 5 sample announcements:
-- New Winter Circling Location
-- Holiday Schedule 2024
-- Initiator Training - January Cohort
-- Updated Circling Guidelines
-- Welcome New Brothers!
+**Feedback Questions:**
+1. Overall impression (1-5 rating)
+2. Look & feel (too soft / just right / too harsh)
+3. Member directory usefulness
+4. Intro letters privacy concerns
+5. Login experience smoothness
+6. Missing features (checkboxes + open text)
+7. Bugs/issues found
+8. Open feedback
 
-**File:** https://drive.google.com/file/d/19PrmC6qOKytNah8owYAdYoZJERvGYFCN/view
+### 5. Flame Logo in Nav
+- Added fire.svg to header nav (24x24px)
+- Shows on both public and member pages
+- Left of "The Men's Circle" text
 
 ---
 
-## Google Drive Structure
+## Google Sheets Structure
 
-**TMC-Site-Draft Folder:**
-| File | Type | Status |
-|------|------|--------|
-| Copy of TMC Roster | Sheet | ✅ Published, connected (includes Announcements tab) |
-| TMC Resources | Sheet | ✅ Published, connected |
+**Roster Sheet:** `1O_HyR5DNs9vwZ-dBvtx5PCWOZCNaMHDLPMxd_x-H68o`
+
+| Tab | Purpose | Status |
+|-----|---------|--------|
+| Active Men | Member roster | ✅ Connected |
+| INTROS | Introduction letters | ✅ Connected |
+| Announcements | News/updates | ✅ Created this session |
+| Website Feedback | Feedback form responses | ✅ Created (headers only) |
+
+**Resources Sheet:** `1OKSYfpmXF2SHjh2K9vl5n0sRs242es5oXbqjGfWOcbs`
 
 ---
 
@@ -87,75 +92,104 @@ Created CSV with 5 sample announcements:
 
 | Variable | Status | Notes |
 |----------|--------|-------|
-| `ROSTER_SHEET_ID` | ✅ Set | `1O_HyR5DNs9vwZ-dBvtx5PCWOZCNaMHDLPMxd_x-H68o` |
-| `RESOURCES_SHEET_ID` | ✅ Set | `1OKSYfpmXF2SHjh2K9vl5n0sRs242es5oXbqjGfWOcbs` |
+| `ROSTER_SHEET_ID` | ✅ Set | Main roster + announcements + intros |
+| `RESOURCES_SHEET_ID` | ✅ Set | TMC documents |
 | `JWT_SECRET` | ✅ Set | For token signing |
 | `RESEND_API_KEY` | ✅ Set | For magic link emails |
-| `ANNOUNCEMENTS_SHEET_ID` | ✅ Not needed | Uses Announcements tab in roster sheet |
 
 ---
 
-## Logo Files
+## API Endpoints
 
-| File | Description |
-|------|-------------|
-| `/public/logo.png` | Full "THE MEN'S CIRCLE" version |
-| `/public/logo-tmc.png` | Abbreviated "TMC" version (currently on homepage) |
-
-Both have #FBFAF7 background to blend with page gradient.
+| Endpoint | Method | Purpose |
+|----------|--------|---------|
+| `/api/auth/login` | POST | Send magic link email |
+| `/api/auth/verify` | GET | Verify magic link token |
+| `/api/members` | GET | Member directory + intros |
+| `/api/resources` | GET | TMC documents |
+| `/api/announcements` | GET | News/updates |
+| `/api/contact` | POST | Public contact form |
+| `/api/feedback` | POST | Proposal site feedback |
 
 ---
 
-## API Data Fields
+## Member Profile Fields
 
-**Members API now returns:**
 ```javascript
 {
   name, firstName, lastName, email, phone, team,
   position,        // Leader, Captain, etc.
   status,          // Active, Sabbatical
-  city, state,
-  website,
-  yearJoined,
-  sponsor,
-  occupation,
+  city, state, website, yearJoined, sponsor, occupation,
   identities,
-  purposeEssence,
-  purposeBlessing,
-  purposeMission,
-  purposeMessage
+  purposeEssence, purposeBlessing, purposeMission, purposeMessage,
+  photoUrl,
+  intro,           // NEW: Full intro letter text
+  introDate        // NEW: When intro was sent
 }
 ```
 
 ---
 
+## Key Design Decisions
+
+### "Beautiful Fallback" Principle
+The website is just a window into Google Sheets. If anything goes wrong with the site, or no one can maintain it, everything continues exactly as before - the sheets remain the source of truth, safe and accessible.
+
+### Intro Letters Display
+Currently showing all intro letters in member profiles. Feedback form specifically asks about privacy concerns. May need to make this opt-in based on feedback.
+
+---
+
 ## Next Session Checklist
 
-- [ ] Activate Announcements (convert CSV → Sheet, set env var)
-- [ ] Switch homepage logo back to full version? (currently TMC)
+- [ ] Review feedback responses (check Vercel logs)
 - [ ] Add member photos (need photo URLs in roster sheet)
-- [ ] Set up custom domain
-- [ ] Switch to production roster (when ready)
+- [ ] Set up custom domain (DNS coordination needed)
+- [ ] Switch to production roster (when approved)
 - [ ] Vision Body approval for go-live
+- [ ] Consider intro letter opt-in based on feedback
 
 ---
 
 ## Quick Commands
 
 ```bash
-# Local dev
+# Local dev (app)
 cd /Users/brian/Documents/AI/personal/themenscircle/app
 npm run dev
 
-# Deploy (auto on push)
+# Local dev (proposal)
+cd /Users/brian/Documents/AI/personal/themenscircle/proposal-site
+npm run dev
+
+# Deploy (auto on push to main)
 git push origin main
 
-# Check Vercel logs
+# Check Vercel logs for feedback
 vercel logs --follow
 ```
 
 ---
 
-## Image Generation Note
+## MCP Servers Available
 
-nano-banana MCP is configured with Gemini API key for logo editing. Config stored locally (not in git).
+- **gsheets** - Read/write Google Sheets
+- **gdrive** - Search/read Google Drive files
+- **gmail** - Email operations
+- **nano-banana** - Image generation (Gemini)
+
+---
+
+## Files Changed This Session
+
+**App:**
+- `api/members.js` - Added INTROS fetch and matching
+- `api/feedback.js` - New feedback endpoint
+- `src/pages/directory.js` - Added intro display in modal
+- `src/main.js` - Added flame logo to nav
+- `src/styles.css` - Intro section + nav logo styles
+
+**Proposal Site:**
+- `index.html` - Preview section, feedback form, fallback section
+- `public/style.css` - New section styles
