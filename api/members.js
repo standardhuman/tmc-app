@@ -30,14 +30,29 @@ export default async function handler(req, res) {
     const activeMembers = members
       .filter(m => {
         const status = m.status?.toLowerCase();
-        const email = m.email || m['e-mail'];
-        return status === 'active' && email;
+        const email = m.email || m.e_mail;
+        return (status === 'active' || status === 'sabbatical') && email;
       })
       .map(m => ({
-        name: m.name || `${m.first_name || ''} ${m.last_name || ''}`.trim(),
-        email: m.email || m['e-mail'],
-        phone: m.phone || m.cell,
-        team: m.team || m.current_team,
+        name: `${m.first_name || ''} ${m.last_name || ''}`.trim(),
+        firstName: m.first_name,
+        lastName: m.last_name,
+        email: m.email || m.e_mail,
+        phone: m.cell,
+        team: m.current_team,
+        position: m.current_position,
+        status: m.status,
+        city: m.city,
+        state: m.state,
+        website: m.website,
+        yearJoined: m.year_joined,
+        sponsor: m.sponsor,
+        occupation: m.occupation,
+        identities: m.identities_use_laptop_not_phone_to_update,
+        purposeEssence: m.purpose_expressed_as_essence,
+        purposeBlessing: m.purpose_expressed_as_blessing,
+        purposeMission: m.purpose_expressed_as_mission,
+        purposeMessage: m.purpose_expressed_as_message,
         photoUrl: m.photo_url || m.photo || null,
       }))
       .sort((a, b) => a.name.localeCompare(b.name));
