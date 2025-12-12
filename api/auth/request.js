@@ -53,9 +53,9 @@ export default async function handler(req, res) {
 
     // Create magic link token
     const token = createMagicToken(memberEmail, memberName, memberStatus);
-    const baseUrl = process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : 'http://localhost:5173';
+    // Use custom APP_URL or fall back to production URL
+    const baseUrl = process.env.APP_URL
+      || 'https://app-sailorskills.vercel.app';
     const magicLink = `${baseUrl}/#/verify?token=${token}`;
 
     // Send email via Resend
