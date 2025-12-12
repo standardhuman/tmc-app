@@ -78,9 +78,8 @@ Created CSV with 5 sample announcements:
 **TMC-Site-Draft Folder:**
 | File | Type | Status |
 |------|------|--------|
-| Copy of TMC Roster | Sheet | ✅ Published, connected |
+| Copy of TMC Roster | Sheet | ✅ Published, connected (includes Announcements tab) |
 | TMC Resources | Sheet | ✅ Published, connected |
-| TMC Announcements | CSV | ⚠️ Needs conversion to Sheet |
 
 ---
 
@@ -92,19 +91,7 @@ Created CSV with 5 sample announcements:
 | `RESOURCES_SHEET_ID` | ✅ Set | `1OKSYfpmXF2SHjh2K9vl5n0sRs242es5oXbqjGfWOcbs` |
 | `JWT_SECRET` | ✅ Set | For token signing |
 | `RESEND_API_KEY` | ✅ Set | For magic link emails |
-| `ANNOUNCEMENTS_SHEET_ID` | ❌ Not set | Need to convert CSV → Sheet first |
-
----
-
-## To Activate Announcements
-
-1. Open the [Announcements CSV](https://drive.google.com/file/d/19PrmC6qOKytNah8owYAdYoZJERvGYFCN/view)
-2. Open with Google Sheets
-3. Rename tab to **Announcements**
-4. Publish (File → Share → Publish to web)
-5. Copy the Sheet ID from URL
-6. Add to Vercel: `ANNOUNCEMENTS_SHEET_ID` = (sheet id)
-7. Redeploy
+| `ANNOUNCEMENTS_SHEET_ID` | ✅ Not needed | Uses Announcements tab in roster sheet |
 
 ---
 
