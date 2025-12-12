@@ -31,18 +31,22 @@ export async function renderResources(app) {
             <h3 style="color: var(--color-forest); margin-bottom: 1rem;">${category}</h3>
             <div class="resource-list">
               ${items.map(resource => `
-                <div class="resource-item" style="padding: 1rem 0; border-bottom: 1px solid var(--color-border);">
-                  <div class="resource-info">
+                <div class="resource-item" style="padding: 1rem 0; border-bottom: 1px solid var(--color-border); display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem;">
+                  <div class="resource-info" style="flex: 1;">
                     <h4 style="margin-bottom: 0.25rem;">${resource.title}</h4>
-                    ${resource.description ? `<p>${resource.description}</p>` : ''}
+                    ${resource.description ? `<p style="margin: 0; color: var(--color-muted);">${resource.description}</p>` : ''}
                   </div>
-                  ${resource.content ? `
+                  ${resource.url ? `
+                    <a href="${resource.url}" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="flex-shrink: 0;">
+                      Open
+                    </a>
+                  ` : resource.content ? `
                     <button class="btn btn-outline" onclick="toggleContent(this, '${resource.id}')" style="flex-shrink: 0;">
                       View
                     </button>
                   ` : ''}
                 </div>
-                ${resource.content ? `
+                ${resource.content && !resource.url ? `
                   <div id="content-${resource.id}" style="display: none; padding: 1rem; background: var(--color-cream); border-radius: 6px; margin: 0.5rem 0 1rem; white-space: pre-wrap;">
                     ${resource.content}
                   </div>

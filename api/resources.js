@@ -31,6 +31,7 @@ export default async function handler(req, res) {
       title: r.title,
       description: r.description,
       category: r.category || 'General',
+      url: r.url,
       content: r.content,
     }));
 
