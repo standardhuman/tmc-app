@@ -46,9 +46,9 @@ export function renderHome(app) {
       <div class="section-content">
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; align-items: center;">
           <div>
-            <h2>Four Teams, One Circle</h2>
+            <h2>Many Teams, One Circle</h2>
             <p style="color: rgba(250, 248, 245, 0.8);">
-              The Men's Circle is organized into four teams — <strong>No</strong>, <strong>Bloom</strong>, <strong>Roar</strong>, and <strong>Electric</strong> — each providing an intimate container for men to do their work while belonging to the larger community.
+              The Men's Circle is organized into multiple teams, each providing an intimate container for men to do their work while belonging to the larger community.
             </p>
             <p style="color: rgba(250, 248, 245, 0.8); margin-bottom: 0;">
               New men are welcomed through an initiation process that prepares them to fully participate in the circle.
