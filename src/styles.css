@@ -1,8 +1,6 @@
 /* === CSS Variables === */
 :root {
   --color-charcoal: #2D2D2D;
-  --color-clay: #5C4033;           /* Warm clay brown - grounded, earthy */
-  --color-sienna: #6B4423;         /* Rich sienna - like fired earth */
   --color-earth: #8B5A2B;
   --color-cream: #FAF8F5;
   --color-ember: #D4652F;
@@ -258,7 +256,7 @@ img {
 /* === Hero Section === */
 .hero {
   padding: 6rem 1.5rem;
-  background: linear-gradient(135deg, var(--color-sienna) 0%, var(--color-clay) 100%);
+  background: linear-gradient(135deg, var(--color-cream) 0%, var(--color-warm-white) 100%);
   text-align: center;
 }
 
@@ -268,7 +266,7 @@ img {
 }
 
 .hero h1 {
-  color: var(--color-cream);
+  color: var(--color-charcoal);
   margin-bottom: 1.5rem;
 }
 
@@ -277,24 +275,12 @@ img {
   width: 100%;
   height: auto;
   margin-bottom: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
 .hero-subtitle {
   font-size: 1.25rem;
-  color: rgba(250, 248, 245, 0.85);
+  color: var(--color-muted);
   margin-bottom: 2rem;
-}
-
-.hero .btn-primary {
-  background: var(--color-ember);
-  border-color: var(--color-ember);
-}
-
-.hero .btn-primary:hover {
-  background: #c15a2a;
-  border-color: #c15a2a;
 }
 
 /* === Sections === */
@@ -309,28 +295,6 @@ img {
 
 .section-alt {
   background: var(--color-warm-white);
-}
-
-.section-dark {
-  background: linear-gradient(135deg, var(--color-clay) 0%, var(--color-sienna) 100%);
-  color: var(--color-cream);
-}
-
-.section-dark h2 {
-  color: var(--color-cream);
-}
-
-.section-dark .card {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.15);
-}
-
-.section-dark .card h3 {
-  color: var(--color-ember);
-}
-
-.section-dark .card p {
-  color: rgba(250, 248, 245, 0.75);
 }
 
 /* === Page Layouts === */
