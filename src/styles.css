@@ -1100,14 +1100,23 @@ img {
       0 0 10px rgba(212, 101, 47, 0.3),
       0 0 20px rgba(212, 101, 47, 0.15);
   }
-  /* Slowly, gracefully dissipate - by 26% */
+  /* Rise up toward the logo and fade - absorbed effect */
   26% {
-    opacity: 0;
-    transform: translateY(-25px) scale(1.02);
-    filter: blur(6px);
+    opacity: 0.3;
+    transform: translateY(-60px) scale(0.95);
+    filter: blur(3px);
     text-shadow:
-      0 0 30px rgba(212, 101, 47, 0.15),
-      0 0 60px rgba(212, 101, 47, 0.05);
+      0 0 25px rgba(212, 101, 47, 0.4),
+      0 0 50px rgba(212, 101, 47, 0.2);
+  }
+  /* Fully absorbed into the logo */
+  30% {
+    opacity: 0;
+    transform: translateY(-100px) scale(0.9);
+    filter: blur(8px);
+    text-shadow:
+      0 0 40px rgba(212, 101, 47, 0.1),
+      0 0 80px rgba(212, 101, 47, 0.05);
   }
   /* Stay hidden for rest of cycle */
   100% {

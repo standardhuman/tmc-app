@@ -73,7 +73,7 @@ export function renderMemberLayout(content, activePage = '') {
           The Men's Circle
         </a>
         <div class="nav-links">
-          <span style="color: var(--color-muted);">Welcome, ${user?.name || 'Member'}</span>
+          <span style="color: rgba(250, 248, 245, 0.85);">Welcome, ${user?.name || 'Member'}</span>
           <a href="#/logout">Logout</a>
         </div>
       </div>
@@ -105,7 +105,7 @@ export function renderPublicLayout(content) {
           The Men's Circle
         </a>
         <div class="nav-links">
-          <a href="#/login" class="btn btn-outline">Member Login</a>
+          <a href="#/login" class="btn btn-outline-light">Member Login</a>
         </div>
       </div>
     </nav>
