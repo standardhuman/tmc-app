@@ -6,6 +6,7 @@
   --color-sand: #F0EBE3;            /* Slightly darker cream for sections */
   --color-ember: #D4652F;
   --color-forest: #4A5D4A;
+  --color-forest-dark: #3a4d3a;     /* Darker forest for gradients */
   --color-warm-white: #FFFDF9;
   --color-muted: #6B6B6B;
   --color-border: #E5E0DA;
@@ -52,7 +53,7 @@ h1, h2, h3, h4, h5 {
 }
 
 h1 { font-size: 3rem; }
-h2 { font-size: 2rem; color: var(--color-earth); }
+h2 { font-size: 2rem; color: var(--color-forest); }
 h3 { font-size: 1.5rem; }
 h4 { font-size: 1.25rem; }
 
@@ -84,9 +85,9 @@ img {
 
 /* === Navigation === */
 .nav {
-  background: rgba(240, 235, 227, 0.95);  /* sand with slight transparency */
+  background: rgba(74, 93, 74, 0.95);  /* forest with slight transparency */
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-forest-dark);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -108,7 +109,11 @@ img {
   font-family: var(--font-serif);
   font-weight: 600;
   font-size: 1.25rem;
-  color: var(--color-earth);
+  color: var(--color-cream);
+}
+
+.nav-logo:hover {
+  color: white;
 }
 
 .nav-logo-icon {
@@ -124,13 +129,13 @@ img {
 
 .nav-links a {
   font-size: 0.9375rem;
-  color: var(--color-muted);
+  color: rgba(250, 248, 245, 0.8);
   font-weight: 500;
 }
 
 .nav-links a:hover,
 .nav-links a.active {
-  color: var(--color-charcoal);
+  color: white;
 }
 
 /* === Buttons === */
@@ -179,6 +184,18 @@ img {
 .btn-outline:hover {
   background: var(--color-earth);
   color: white;
+}
+
+/* Light outline button for dark backgrounds */
+.btn-outline-light {
+  background: transparent;
+  border: 2px solid rgba(250, 248, 245, 0.8);
+  color: var(--color-cream);
+}
+
+.btn-outline-light:hover {
+  background: var(--color-cream);
+  color: var(--color-forest);
 }
 
 .btn:disabled {
@@ -257,17 +274,33 @@ img {
 /* === Hero Section === */
 .hero {
   padding: 6rem 1.5rem;
-  background: linear-gradient(135deg, var(--color-cream) 0%, var(--color-warm-white) 100%);
+  background: linear-gradient(135deg, var(--color-forest) 0%, var(--color-forest-dark) 100%);
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg-image {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  max-width: 90%;
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .hero-content {
+  position: relative;
+  z-index: 1;
   max-width: var(--content-width);
   margin: 0 auto;
 }
 
 .hero h1 {
-  color: var(--color-charcoal);
+  color: var(--color-cream);
   margin-bottom: 1.5rem;
 }
 
@@ -280,7 +313,7 @@ img {
 
 .hero-subtitle {
   font-size: 1.25rem;
-  color: var(--color-muted);
+  color: rgba(250, 248, 245, 0.85);
   margin-bottom: 2rem;
 }
 

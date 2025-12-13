@@ -6,7 +6,7 @@ export function renderHome(app) {
     <header class="hero">
       <div class="hero-content">
         <img src="/logo-tmc.png" alt="The Men's Circle" class="hero-logo">
-        <p class="hero-subtitle" style="font-size: 1.5rem; font-style: italic; color: var(--color-ember); margin-bottom: 1rem;">
+        <p class="hero-subtitle" style="font-size: 1.5rem; font-style: italic; color: var(--color-cream); margin-bottom: 1rem;">
           We forge brotherhood, inspire transformation, and support men in living on purpose.
         </p>
         <p class="hero-subtitle">
@@ -21,19 +21,19 @@ export function renderHome(app) {
         <h2 style="text-align: center; margin-bottom: 2rem;">What We Do</h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
           <div class="card">
-            <h3 style="color: var(--color-ember);">Weekly Gatherings</h3>
+            <h3 style="color: var(--color-forest);">Weekly Gatherings</h3>
             <p style="color: var(--color-muted); margin: 0;">
               We meet each week around a fire to share openly, challenge each other, and hold space for what matters most.
             </p>
           </div>
           <div class="card">
-            <h3 style="color: var(--color-ember);">Brotherhood</h3>
+            <h3 style="color: var(--color-forest);">Brotherhood</h3>
             <p style="color: var(--color-muted); margin: 0;">
               Deep connections with men who see you fully and call you forward into your highest expression.
             </p>
           </div>
           <div class="card">
-            <h3 style="color: var(--color-ember);">Purpose Work</h3>
+            <h3 style="color: var(--color-forest);">Purpose Work</h3>
             <p style="color: var(--color-muted); margin: 0;">
               Discover and live your purpose through honest reflection, feedback, and committed action.
             </p>
@@ -102,17 +102,17 @@ export function renderHome(app) {
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; max-width: 700px; margin: 0 auto; text-align: center;">
           <div>
             <p style="font-size: 1.5rem; margin-bottom: 0.25rem;">📅</p>
-            <h4 style="color: var(--color-earth); margin-bottom: 0.5rem;">When</h4>
+            <h4 style="color: var(--color-forest); margin-bottom: 0.5rem;">When</h4>
             <p style="color: var(--color-muted); margin: 0;">Weekly on Wednesdays</p>
           </div>
           <div>
             <p style="font-size: 1.5rem; margin-bottom: 0.25rem;">🔥</p>
-            <h4 style="color: var(--color-earth); margin-bottom: 0.5rem;">Where</h4>
+            <h4 style="color: var(--color-forest); margin-bottom: 0.5rem;">Where</h4>
             <p style="color: var(--color-muted); margin: 0;">Bay Area parks & online</p>
           </div>
           <div>
             <p style="font-size: 1.5rem; margin-bottom: 0.25rem;">💰</p>
-            <h4 style="color: var(--color-earth); margin-bottom: 0.5rem;">Cost</h4>
+            <h4 style="color: var(--color-forest); margin-bottom: 0.5rem;">Cost</h4>
             <p style="color: var(--color-muted); margin: 0;">Free to join</p>
           </div>
         </div>
