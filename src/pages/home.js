@@ -108,7 +108,7 @@ export function renderHome(app) {
           <div>
             <p style="font-size: 1.5rem; margin-bottom: 0.25rem;">🔥</p>
             <h4 style="color: var(--color-earth); margin-bottom: 0.5rem;">Where</h4>
-            <p style="color: var(--color-muted); margin: 0;">Around a fire in Bay Area parks</p>
+            <p style="color: var(--color-muted); margin: 0;">Bay Area parks & online</p>
           </div>
           <div>
             <p style="font-size: 1.5rem; margin-bottom: 0.25rem;">💰</p>
