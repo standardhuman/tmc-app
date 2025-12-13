@@ -42,6 +42,38 @@ export function renderHome(app) {
       </div>
     </section>
 
+    <section class="section">
+      <div class="section-content">
+        <h2 style="text-align: center; margin-bottom: 2rem;">What Members Experience</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; max-width: 900px; margin: 0 auto;">
+          <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
+            <span style="color: var(--color-ember); font-size: 1.25rem;">✓</span>
+            <p style="margin: 0; color: var(--color-charcoal);">Clarity on personal purpose and direction</p>
+          </div>
+          <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
+            <span style="color: var(--color-ember); font-size: 1.25rem;">✓</span>
+            <p style="margin: 0; color: var(--color-charcoal);">Improved communication skills</p>
+          </div>
+          <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
+            <span style="color: var(--color-ember); font-size: 1.25rem;">✓</span>
+            <p style="margin: 0; color: var(--color-charcoal);">Stronger intimate relationships</p>
+          </div>
+          <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
+            <span style="color: var(--color-ember); font-size: 1.25rem;">✓</span>
+            <p style="margin: 0; color: var(--color-charcoal);">Completion of long-delayed projects</p>
+          </div>
+          <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
+            <span style="color: var(--color-ember); font-size: 1.25rem;">✓</span>
+            <p style="margin: 0; color: var(--color-charcoal);">Honest feedback and encouragement</p>
+          </div>
+          <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
+            <span style="color: var(--color-ember); font-size: 1.25rem;">✓</span>
+            <p style="margin: 0; color: var(--color-charcoal);">A confidential space for emotional expression</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section" style="background: var(--color-sand);">
       <div class="section-content">
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; align-items: center;">
@@ -64,7 +96,30 @@ export function renderHome(app) {
       </div>
     </section>
 
-    <section id="contact" class="section">
+    <section class="section">
+      <div class="section-content">
+        <h2 style="text-align: center; margin-bottom: 2rem;">When We Meet</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; max-width: 700px; margin: 0 auto; text-align: center;">
+          <div>
+            <p style="font-size: 1.5rem; margin-bottom: 0.25rem;">📅</p>
+            <h4 style="color: var(--color-earth); margin-bottom: 0.5rem;">When</h4>
+            <p style="color: var(--color-muted); margin: 0;">Weekly on Wednesdays</p>
+          </div>
+          <div>
+            <p style="font-size: 1.5rem; margin-bottom: 0.25rem;">🔥</p>
+            <h4 style="color: var(--color-earth); margin-bottom: 0.5rem;">Where</h4>
+            <p style="color: var(--color-muted); margin: 0;">Around a fire in Bay Area parks</p>
+          </div>
+          <div>
+            <p style="font-size: 1.5rem; margin-bottom: 0.25rem;">💰</p>
+            <h4 style="color: var(--color-earth); margin-bottom: 0.5rem;">Cost</h4>
+            <p style="color: var(--color-muted); margin: 0;">Free to join</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section" style="background: var(--color-sand);">
       <div class="section-content" style="max-width: 600px;">
         <h2 style="text-align: center; margin-bottom: 0.5rem;">Connect With Us</h2>
         <p style="text-align: center; color: var(--color-muted); margin-bottom: 2rem;">
@@ -99,6 +154,10 @@ export function renderHome(app) {
 
           <div id="form-message" style="margin-top: 1rem;"></div>
         </form>
+
+        <p style="text-align: center; font-size: 0.875rem; color: var(--color-muted); margin-top: 1.5rem;">
+          🔒 The Men's Circle maintains strict confidentiality. What's shared in the circle stays in the circle.
+        </p>
       </div>
     </section>
   `);
