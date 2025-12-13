@@ -27,7 +27,14 @@ async function request(endpoint, options = {}) {
     throw new Error('Session expired');
   }
 
-  const data = await response.json();
+  // Handle empty responses (e.g., 404 from missing API endpoint)
+  const text = await response.text();
+  let data;
+  try {
+    data = text ? JSON.parse(text) : {};
+  } catch (e) {
+    throw new Error('Server error: Unable to connect to API');
+  }
 
   if (!response.ok) {
     throw new Error(data.error || 'Request failed');

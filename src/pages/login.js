@@ -18,7 +18,7 @@ export function renderLogin(app) {
         <form id="login-form" class="login-form">
           <div class="form-group">
             <label class="form-label">Email Address</label>
-            <input type="email" name="email" class="form-input" required placeholder="your@email.com">
+            <input type="text" name="email" class="form-input" required placeholder="your@email.com">
           </div>
 
           <button type="submit" class="btn btn-primary" style="width: 100%;">

@@ -3,12 +3,31 @@ import { submitContactForm } from '../lib/api.js';
 
 export function renderHome(app) {
   app.innerHTML = renderPublicLayout(`
-    <header class="hero">
+    <header class="hero hero-with-fire">
       <div class="hero-content">
         <img src="/logo-tmc.png" alt="The Men's Circle" class="hero-logo">
-        <p class="hero-subtitle" style="font-size: 1.5rem; font-style: italic; color: var(--color-cream); margin-bottom: 1rem;">
-          We forge brotherhood, inspire transformation, and support men in living on purpose.
-        </p>
+
+        <div class="hero-fire-words">
+          <div class="ember-bed">
+            <div class="ember"></div>
+            <div class="ember"></div>
+            <div class="ember"></div>
+            <div class="ember"></div>
+            <div class="ember"></div>
+            <div class="ember"></div>
+            <div class="ember"></div>
+            <div class="ember"></div>
+            <div class="ember"></div>
+            <div class="ember"></div>
+          </div>
+          <div class="fire-words-cycle">
+            <span class="fire-word-cycle" data-index="0">Brotherhood</span>
+            <span class="fire-word-cycle" data-index="1">Transformation</span>
+            <span class="fire-word-cycle" data-index="2">Support</span>
+            <span class="fire-word-cycle" data-index="3">Purpose</span>
+          </div>
+        </div>
+
         <p class="hero-subtitle">
           A community of men committed to growth, accountability, and authentic connection.
         </p>
@@ -200,4 +219,5 @@ export function renderHome(app) {
       submitBtn.textContent = 'Send Message';
     }
   });
+
 }
