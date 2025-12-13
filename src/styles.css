@@ -1,8 +1,8 @@
 /* === CSS Variables === */
 :root {
   --color-charcoal: #2D2D2D;
-  --color-night: #1C1A18;          /* Deep warm black - like night around a fire */
-  --color-smoke: #2A2725;          /* Warm dark gray - like wood smoke */
+  --color-clay: #5C4033;           /* Warm clay brown - grounded, earthy */
+  --color-sienna: #6B4423;         /* Rich sienna - like fired earth */
   --color-earth: #8B5A2B;
   --color-cream: #FAF8F5;
   --color-ember: #D4652F;
@@ -258,7 +258,7 @@ img {
 /* === Hero Section === */
 .hero {
   padding: 6rem 1.5rem;
-  background: linear-gradient(135deg, var(--color-night) 0%, var(--color-smoke) 100%);
+  background: linear-gradient(135deg, var(--color-sienna) 0%, var(--color-clay) 100%);
   text-align: center;
 }
 
@@ -277,8 +277,8 @@ img {
   width: 100%;
   height: auto;
   margin-bottom: 1.5rem;
-  /* Invert the logo for dark background if needed */
-  filter: brightness(1.1);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
 .hero-subtitle {
@@ -312,7 +312,7 @@ img {
 }
 
 .section-dark {
-  background: linear-gradient(135deg, var(--color-smoke) 0%, var(--color-night) 100%);
+  background: linear-gradient(135deg, var(--color-clay) 0%, var(--color-sienna) 100%);
   color: var(--color-cream);
 }
 
@@ -321,8 +321,8 @@ img {
 }
 
 .section-dark .card {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
 .section-dark .card h3 {
