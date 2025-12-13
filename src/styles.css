@@ -1,6 +1,8 @@
 /* === CSS Variables === */
 :root {
   --color-charcoal: #2D2D2D;
+  --color-night: #1C1A18;          /* Deep warm black - like night around a fire */
+  --color-smoke: #2A2725;          /* Warm dark gray - like wood smoke */
   --color-earth: #8B5A2B;
   --color-cream: #FAF8F5;
   --color-ember: #D4652F;
@@ -256,7 +258,7 @@ img {
 /* === Hero Section === */
 .hero {
   padding: 6rem 1.5rem;
-  background: linear-gradient(135deg, var(--color-cream) 0%, var(--color-warm-white) 100%);
+  background: linear-gradient(135deg, var(--color-night) 0%, var(--color-smoke) 100%);
   text-align: center;
 }
 
@@ -266,7 +268,7 @@ img {
 }
 
 .hero h1 {
-  color: var(--color-charcoal);
+  color: var(--color-cream);
   margin-bottom: 1.5rem;
 }
 
@@ -275,12 +277,24 @@ img {
   width: 100%;
   height: auto;
   margin-bottom: 1.5rem;
+  /* Invert the logo for dark background if needed */
+  filter: brightness(1.1);
 }
 
 .hero-subtitle {
   font-size: 1.25rem;
-  color: var(--color-muted);
+  color: rgba(250, 248, 245, 0.85);
   margin-bottom: 2rem;
+}
+
+.hero .btn-primary {
+  background: var(--color-ember);
+  border-color: var(--color-ember);
+}
+
+.hero .btn-primary:hover {
+  background: #c15a2a;
+  border-color: #c15a2a;
 }
 
 /* === Sections === */
@@ -295,6 +309,28 @@ img {
 
 .section-alt {
   background: var(--color-warm-white);
+}
+
+.section-dark {
+  background: linear-gradient(135deg, var(--color-smoke) 0%, var(--color-night) 100%);
+  color: var(--color-cream);
+}
+
+.section-dark h2 {
+  color: var(--color-cream);
+}
+
+.section-dark .card {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.section-dark .card h3 {
+  color: var(--color-ember);
+}
+
+.section-dark .card p {
+  color: rgba(250, 248, 245, 0.75);
 }
 
 /* === Page Layouts === */

@@ -6,7 +6,7 @@ export function renderHome(app) {
     <header class="hero">
       <div class="hero-content">
         <img src="/logo-tmc.png" alt="The Men's Circle" class="hero-logo">
-        <p class="hero-subtitle" style="font-size: 1.5rem; font-style: italic; color: var(--color-earth); margin-bottom: 1rem;">
+        <p class="hero-subtitle" style="font-size: 1.5rem; font-style: italic; color: var(--color-ember); margin-bottom: 1rem;">
           We forge brotherhood, inspire transformation, and support men in living on purpose.
         </p>
         <p class="hero-subtitle">
@@ -42,23 +42,23 @@ export function renderHome(app) {
       </div>
     </section>
 
-    <section class="section section-alt">
+    <section class="section section-dark">
       <div class="section-content">
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; align-items: center;">
           <div>
             <h2>Four Teams, One Circle</h2>
-            <p style="color: var(--color-muted);">
+            <p style="color: rgba(250, 248, 245, 0.8);">
               The Men's Circle is organized into four teams — <strong>No</strong>, <strong>Bloom</strong>, <strong>Roar</strong>, and <strong>Electric</strong> — each providing an intimate container for men to do their work while belonging to the larger community.
             </p>
-            <p style="color: var(--color-muted); margin-bottom: 0;">
+            <p style="color: rgba(250, 248, 245, 0.8); margin-bottom: 0;">
               New men are welcomed through an initiation process that prepares them to fully participate in the circle.
             </p>
           </div>
-          <div style="background: var(--color-charcoal); color: white; padding: 2.5rem; border-radius: 8px; text-align: center;">
-            <p style="font-family: var(--font-serif); font-size: 1.5rem; font-style: italic; margin-bottom: 1rem;">
+          <div style="background: rgba(212, 101, 47, 0.15); border: 1px solid rgba(212, 101, 47, 0.3); color: var(--color-cream); padding: 2.5rem; border-radius: 8px; text-align: center;">
+            <p style="font-family: var(--font-serif); font-size: 1.5rem; font-style: italic; margin-bottom: 1rem; color: var(--color-cream);">
               "In the Men's Circle, we forge brotherhood, inspire transformation, and support men in living on purpose."
             </p>
-            <p style="font-size: 0.9375rem; opacity: 0.8; margin: 0;">Our Purpose</p>
+            <p style="font-size: 0.9375rem; color: var(--color-ember); margin: 0;">Our Purpose</p>
           </div>
         </div>
       </div>
