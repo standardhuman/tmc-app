@@ -16,7 +16,7 @@ export function renderHome(app) {
       </div>
     </header>
 
-    <section class="section">
+    <section class="section" style="background: var(--color-sand);">
       <div class="section-content">
         <h2 style="text-align: center; margin-bottom: 2rem;">What We Do</h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
@@ -54,11 +54,11 @@ export function renderHome(app) {
               New men are welcomed through an initiation process that prepares them to fully participate in the circle.
             </p>
           </div>
-          <div style="background: rgba(212, 101, 47, 0.15); border: 1px solid rgba(212, 101, 47, 0.3); color: var(--color-cream); padding: 2.5rem; border-radius: 8px; text-align: center;">
-            <p style="font-family: var(--font-serif); font-size: 1.5rem; font-style: italic; margin-bottom: 1rem; color: var(--color-cream);">
+          <div style="background: var(--color-charcoal); color: white; padding: 2.5rem; border-radius: 8px; text-align: center;">
+            <p style="font-family: var(--font-serif); font-size: 1.5rem; font-style: italic; margin-bottom: 1rem;">
               "In the Men's Circle, we forge brotherhood, inspire transformation, and support men in living on purpose."
             </p>
-            <p style="font-size: 0.9375rem; color: var(--color-ember); margin: 0;">Our Purpose</p>
+            <p style="font-size: 0.9375rem; opacity: 0.8; margin: 0;">Our Purpose</p>
           </div>
         </div>
       </div>

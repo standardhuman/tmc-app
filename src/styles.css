@@ -3,6 +3,7 @@
   --color-charcoal: #2D2D2D;
   --color-earth: #8B5A2B;
   --color-cream: #FAF8F5;
+  --color-sand: #F0EBE3;            /* Slightly darker cream for sections */
   --color-ember: #D4652F;
   --color-forest: #4A5D4A;
   --color-warm-white: #FFFDF9;
@@ -256,7 +257,7 @@ img {
 /* === Hero Section === */
 .hero {
   padding: 6rem 1.5rem;
-  background: linear-gradient(135deg, var(--color-cream) 0%, var(--color-warm-white) 100%);
+  background: linear-gradient(135deg, var(--color-sand) 0%, var(--color-cream) 100%);
   text-align: center;
 }
 
