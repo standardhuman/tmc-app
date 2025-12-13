@@ -42,15 +42,15 @@ export function renderHome(app) {
       </div>
     </section>
 
-    <section class="section section-dark">
+    <section class="section" style="background: var(--color-sand);">
       <div class="section-content">
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; align-items: center;">
           <div>
             <h2>Many Teams, One Circle</h2>
-            <p style="color: rgba(250, 248, 245, 0.8);">
+            <p style="color: var(--color-muted);">
               The Men's Circle is organized into multiple teams, each providing an intimate container for men to do their work while belonging to the larger community.
             </p>
-            <p style="color: rgba(250, 248, 245, 0.8); margin-bottom: 0;">
+            <p style="color: var(--color-muted); margin-bottom: 0;">
               New men are welcomed through an initiation process that prepares them to fully participate in the circle.
             </p>
           </div>
