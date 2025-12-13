@@ -202,7 +202,11 @@ function renderMemberDetail(member) {
         <h3>TMC Journey</h3>
         <p><strong>Team:</strong> ${member.team || 'Unknown'}</p>
         ${member.yearJoined ? `<p><strong>Member Since:</strong> ${member.yearJoined}</p>` : ''}
+        ${member.stepUpDate ? `<p><strong>Step-Up Date:</strong> ${member.stepUpDate}</p>` : ''}
         ${member.sponsor ? `<p><strong>Sponsor:</strong> ${member.sponsor}</p>` : ''}
+        ${member.houseCleaningSeason ? `<p><strong>House Cleaning Season:</strong> ${member.houseCleaningSeason}</p>` : ''}
+        ${member.pastTeams ? `<p><strong>Past Teams:</strong> ${member.pastTeams}</p>` : ''}
+        ${member.pastPosition ? `<p><strong>Past Positions:</strong> ${member.pastPosition}</p>` : ''}
       </div>
 
       ${member.intro ? `

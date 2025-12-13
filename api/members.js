@@ -80,6 +80,11 @@ export default async function handler(req, res) {
           photoUrl: m.photo_url || m.photo || null,
           intro: intro?.text || null,
           introDate: intro?.dateSent || null,
+          // Additional TMC journey fields
+          stepUpDate: m.stepup_date || null,
+          houseCleaningSeason: m.house_cleaning_season || null,
+          pastTeams: m.teams || null,
+          pastPosition: m.past_position || null,
         };
       })
       .sort((a, b) => a.name.localeCompare(b.name));

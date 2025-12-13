@@ -156,11 +156,11 @@ Currently showing all intro letters in member profiles. Feedback form specifical
 
 ```bash
 # Local dev (app)
-cd /Users/brian/Documents/AI/personal/themenscircle/app
+cd /Users/brian/Documents/AI/personal/themenscircle/tmc-site-demo
 npm run dev
 
 # Local dev (proposal)
-cd /Users/brian/Documents/AI/personal/themenscircle/proposal-site
+cd /Users/brian/Documents/AI/personal/themenscircle/tmc-site-proposal
 npm run dev
 
 # Deploy (auto on push to main)
